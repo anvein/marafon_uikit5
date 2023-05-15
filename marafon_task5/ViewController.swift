@@ -64,11 +64,11 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate 
     }
 
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
-        buttonShowPopup.setTitleColor(.lightGray, for: .normal)
+        self.buttonShowPopup.setTitleColor(.lightGray, for: .normal)
     }
      
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        buttonShowPopup.setTitleColor(.systemBlue, for: .normal)
+        self.buttonShowPopup.setTitleColor(.systemBlue, for: .normal)
     }
     
 }
@@ -153,6 +153,9 @@ class PopupViewController: UIViewController {
     
     @objc func closePopup() {
         dismiss(animated: true, completion: nil)
+        
+        guard let popoverPresentationController = popoverPresentationController else { return }
+        popoverPresentationController.delegate?.presentationControllerDidDismiss?(popoverPresentationController)
     }
     
 }
